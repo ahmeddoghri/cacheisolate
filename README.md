@@ -4,6 +4,8 @@
 
 Reproduce prefix-cache timing leakage and compare shared, tenant-isolated, and selectively isolated serving policies.
 
+![cacheisolate cover](demo/cover.png)
+
 ![cacheisolate workbench](demo/dashboard.png)
 
 ## What ships
