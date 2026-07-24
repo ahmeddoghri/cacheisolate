@@ -1,0 +1,12 @@
+{
+  "name": "cacheisolate",
+  "tagline": "Multi-tenant prefix-cache side-channel auditor",
+  "headline": "A faster response can reveal another user's prompt.",
+  "summary": "Reproduce prefix-cache timing leakage and compare shared, tenant-isolated, and selectively isolated serving policies.",
+  "accent": "#72c7ff",
+  "topics": "llm-security,kv-cache,prefix-caching,side-channel,multi-tenant,inference",
+  "sources": [
+    ["Prompt Leakage via KV-Cache Sharing, NDSS 2025", "https://www.ndss-symposium.org/wp-content/uploads/2025-1772-paper.pdf"],
+    ["CacheSolidarity", "https://arxiv.org/abs/2603.10726"]
+  ]
+}

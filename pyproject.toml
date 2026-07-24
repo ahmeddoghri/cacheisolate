@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cacheisolate"
+version = "0.1.0"
+description = "Multi-tenant prefix-cache side-channel auditor"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Ahmed Doghri"}]
+dependencies = []
+
+[project.scripts]
+cacheisolate = "cacheisolate.cli:main"
+
+[tool.setuptools]
+packages = ["cacheisolate"]
+
+[tool.setuptools.package-data]
+cacheisolate = ["web/*.html"]

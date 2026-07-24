@@ -1,0 +1,5 @@
+services:
+  cacheisolate:
+    build: .
+    ports:
+      - "8090:8090"
