@@ -32,7 +32,11 @@ def _cache_key(event: dict, policy: str) -> str:
         namespace = tenant if event.get("sensitive", True) else "public"
     else:
         raise ValueError(f"unknown policy: {policy}")
-    return _digest(f"{namespace}|{prefix}")
+    # Length-prefix each component so a "|" embedded in an attacker-controlled
+    # tenant or prefix string can't shift the namespace/prefix boundary and
+    # collide with a different tenant's key (e.g. tenant="victim|private",
+    # prefix="x" must not hash the same as tenant="victim", prefix="private|x").
+    return _digest(f"{len(namespace)}:{namespace}|{len(prefix)}:{prefix}")
 
 
 def simulate(events: list[dict], policy: str, hit_latency_ms: float, miss_latency_ms: float) -> dict:
