@@ -1,5 +1,7 @@
 # cacheisolate
 
+[![tests](https://github.com/ahmeddoghri/cacheisolate/actions/workflows/tests.yml/badge.svg)](https://github.com/ahmeddoghri/cacheisolate/actions/workflows/tests.yml) [![case study](https://img.shields.io/badge/case%20study-adoghri.com-e0703e)](https://adoghri.com/project-58.html)
+
 **Multi-tenant prefix-cache side-channel auditor.**
 
 Reproduce prefix-cache timing leakage and compare shared, tenant-isolated, and selectively isolated serving policies.
