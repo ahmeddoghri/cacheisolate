@@ -62,6 +62,15 @@ recovered fix, and a general delimiter-embedded-prefix case; the published
 demo numbers (86 ms gap, `alpha` inferred under `shared`, no leak under
 `tenant_isolated`/`selective`) are unaffected.
 
+### The boundary holds under a sweep, not just one case
+
+The fix is checked against one crafted pair and against every combination of
+16 adversarial component values (the separator alone, leading and trailing
+separators, digits that could be mistaken for a length prefix, backslashes),
+256 pairs in all: **no two distinct `(tenant, prefix)` inputs share a cache
+key.** A collision there would reopen the leak under the one policy this
+tool reports as leak-free.
+
 ## Scope
 
 This deterministic harness establishes the attack mechanism. Production results depend on network jitter, continuous batching, scheduler behavior, routing, quantization, and the serving engine.

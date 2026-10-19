@@ -49,3 +49,28 @@ class DelimiterInjectionTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class KeyDerivationPropertyTest(unittest.TestCase):
+    """No pair of distinct (tenant, prefix) inputs may share a cache key."""
+
+    def test_no_collisions_across_adversarial_component_pairs(self):
+        import itertools
+
+        from cacheisolate.core import _cache_key
+
+        # Values built from the separator, lengths and padding an attacker
+        # would reach for when trying to shift the component boundary.
+        pieces = ["", "a", "|", "a|", "|a", "aa", "a|b", "victim", "victim|private",
+                  "private", "1|", "|1", "12", "1|2", "\\", "\\|"]
+        seen = {}
+        for tenant, prefix in itertools.product(pieces, repeat=2):
+            event = {"tenant": tenant, "prefix": prefix, "sensitive": True}
+            key = _cache_key(event, "tenant_isolated")
+            if key in seen:
+                self.assertEqual(
+                    seen[key], (tenant, prefix),
+                    f"distinct inputs share a cache key: {seen[key]} and {(tenant, prefix)}",
+                )
+            seen[key] = (tenant, prefix)
+        self.assertEqual(len(seen), len(pieces) ** 2)
